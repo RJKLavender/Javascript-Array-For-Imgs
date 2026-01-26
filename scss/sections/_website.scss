@@ -1,0 +1,162 @@
+//Styling for interface of website 
+
+.container {
+    margin: 25px auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 2px solid $dark;
+    border-radius: 10px;
+    background-color: $white;
+    color: $black;
+
+    @media (min-width: $small) {
+        width: 750px;
+    }
+
+    @media (min-width: $medium) {
+        width: 970px;
+    }
+
+    @media (min-width: $large) {
+        width: 1200px;
+    }
+}
+
+.img-generator-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+
+    .img-title {
+        text-align: center;
+
+        h1 {
+            padding: 10px 0;
+            margin-bottom:10px;
+        }
+
+        p {
+
+        }
+    }
+
+	.img-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 10px 0;
+
+		.generate-img {
+            background-color: $red;
+        }
+
+        .generate-img:hover {
+            background-color: $hover-red;
+        }
+
+		.img-container {
+            
+            img {
+
+            }
+        }
+
+		.request-email-message {
+
+        }
+
+        .button-row {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            margin: 10px 0;
+
+		    .generate-img-current {
+                background-color: $red;
+            }
+
+		    .generate-img-new {
+                background-color: $red;
+            }
+
+            .generate-img-current:hover {
+                background-color: $hover-red;
+            }
+
+		    .generate-img-new:hover {
+                background-color: $hover-red;
+            }
+
+		    .request-new-email-message {
+
+            }
+        }
+    }
+
+	.img-form-box {
+
+		.img-form {
+
+		    .form-field {
+
+				label {
+
+                }
+
+                .formtext {
+
+                }
+
+                .error-messege {
+
+                }
+
+			    .submit {
+
+                }
+
+                .submit:hover {
+
+                }
+            }
+        }
+    }
+
+	.linked-imgs-box {
+
+		h2 {
+
+        }
+
+		.display-imgs {
+
+        }
+
+        .display-imgs:hover {
+
+        }
+
+        .linked-imgs-container {
+
+            h3 {
+
+            }
+
+            .linked-imgs-box {
+
+                img {
+
+                }
+            }
+        }
+    }
+}
+
+.btn {
+    color: $white;
+    font-size: 18px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin: 10px;
+}

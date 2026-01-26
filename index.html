@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8"> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="ROBOTS" content="NOINDEX,NOFOLLOW"> 
+	<title>javascript Array Assestment</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="javascript/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+<!--Javascript Array Interface for Generatoring Imgs and Linking Them to Emails-->
+<div class="container">
+	<div class="img-generator-box">
+		<div class="Img-title">
+			<h1>Javascript Array Image Generator</h1>
+			<p></p>
+		</div>
+		<div class="img-box">
+			<button class="generate-img btn" type="button">Generate Image</button>
+			<div class="img-container">
+			<!--html will be generate by script here-->
+			</div>
+			<span class="request-email-message hidden"></span>
+			<div class="button-row">
+				<button class="generate-img btn hidden" type="button">Generate Another Image for This Email</button>
+				<button class="generate-img btn hidden" type="button">Generate Image Img for New Email</button>
+				<span class="request-new-email-message hidden"></span>
+			</div>
+		</div>
+		<div class="img-form-box">
+			<form class="img-form">
+				<div class="form-field">
+					<label for="email">Email:</label>
+					<input id="email" class="email formtext" name="email" type="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" placeholder="Email" required>
+					<span class="error-message hidden"></span>
+				</div>
+				<button class="submit btn" type="submit">Submit</button>
+			</form>
+		</div>
+		<div class="linked-imgs-box">
+			<h2> All Images Linked To All Emails</h2>
+			<button class="display-imgs btn hidden" type="button">Display All Current Linked Images</button>
+			<!--html will be generate by script here-->
+		</div>
+	</div>
+</div>
+
+<script src="javascript/images.js"></script>
+</body>
+</html>

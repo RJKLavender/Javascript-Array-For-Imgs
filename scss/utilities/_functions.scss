@@ -1,0 +1,9 @@
+//functions
+
+//This function is used to convert pixel defination to rem defintaion.
+//This function has been used for all font sizes and line heights when styling this website.
+@function rem($target-value, $base-value: 16px) 
+{
+	@return ($target-value/$base-value) * 1rem;
+}
+

@@ -1,0 +1,47 @@
+//Mixins
+
+// Fontface function for all normal style fornt
+@mixin font-face($family, $file, $weight)
+{
+    @font-face {
+        font-family: $family;
+        src: url('#{$font-path}/#{$file}.ttf') format('truetype');
+        font-weight: $weight;
+        
+    }
+}
+
+// Fontface function for all italic style fornt
+@mixin font-face-italic($family, $file, $weight, $style)
+{
+    @font-face {
+        font-family: $family;
+        src: url('#{$font-path}/#{$file}.ttf') format('truetype');
+        font-weight: $weight;
+        font-style: $style;
+        
+    }
+}
+
+//Colour Mixins for the panels, icons and buttons they are used to define background and text colours.
+//panel mixin
+@mixin panelcolor($panel-bg-color) {
+  background-color: $panel-bg-color;
+}
+
+//button mixin
+@mixin buttoncolor($button-bg-color, $button-text-color) {
+  background-color: $button-bg-color;
+  color: $button-text-color;
+}
+
+//icon mixin
+@mixin iconcolor($icon-bg-color, $icon-text-color) {
+  background-color: $icon-bg-color;
+  color: $icon-text-color;
+}
+
+//Sub-Nav mixin
+@mixin navcolor($nav-bg-color) {
+  background-color: $nav-bg-color;
+}

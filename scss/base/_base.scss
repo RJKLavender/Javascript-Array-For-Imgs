@@ -1,0 +1,97 @@
+// Main Base Styles
+// body and universal styles
+body {
+margin: 0;
+font-family: $Poppins,sans-serif;
+letter-spacing: 0.4px;
+font-size: $base-font-size;
+line-height: ($base-line-height/$base-font-size); //line height calcuation for the base font outputs 1.5
+font-weight: $font-reg;
+background-color: $lightblue;
+}
+
+* {
+box-sizing: border-box;
+}
+
+//used to remove certain containers with javascript
+.hidden {
+    display:none;
+}
+
+// standard html Elements
+a {
+    cursor: pointer;
+    text-decoration:none;
+}
+
+a:focus { 
+    outline: thin dotted;
+}
+
+//prevents useragent styling from overriding colour of links
+a:link, a:any-link, a:active, a:focus, a:visited {
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+    font-family: inherit;
+}
+
+p {
+    font-size: rem(13px);
+    line-height: rem(22px);
+    font-weight: $font-reg;
+    margin:0;   
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+h2, h3, h4 {
+    line-height: 1.1;
+    font-weight: $font-reg;
+    margin:0;
+}
+
+h1 {
+    font-size: rem(36px);
+    font-weight: $font-semibold;
+    line-height: 1.1;
+    margin:0;
+}
+
+h2 {
+    font-size: rem(36px);
+}
+
+h3 {
+    font-size: rem(18px);
+}
+
+h4 {
+    font-size: rem(16px);
+}
+
+h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover {
+    text-decoration: underline;
+}
+
+ul {
+    list-style: none;
+    text-decoration: none;
+}
+
+strong {
+    font-weight: $font-semibold
+}
+
+input, textarea, select {
+    font-family: inherit;
+}
+
+1mg {
+    
+}

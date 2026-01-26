@@ -1,0 +1,196 @@
+//Fonts and Icon set up
+//I use fontface mixins for the poppins fonts
+
+//Poppins fonts
+@include font-face('Poppins',Poppins-Black,900);
+@include font-face('Poppins',Poppins-Bold,700);
+@include font-face('Poppins',Poppins-ExtraBold, 800);
+@include font-face('Poppins',Poppins-ExtraLight,200);
+@include font-face('Poppins',Poppins-Light,300);
+@include font-face('Poppins',Poppins-Medium, 500);
+@include font-face('Poppins',Poppins-Regular,400);
+@include font-face('Poppins',Poppins-SemiBold, 600);
+@include font-face('Poppins',Poppins-Thin,100);
+
+//italic Poppins fonts
+@include font-face-italic('Poppins',Poppins-BlackItalic,900, italic);
+@include font-face-italic('Poppins',Poppins-BoldItalic,700, italic );
+@include font-face-italic('Poppins',Poppins-ExtraBoldItalic, 800, italic);
+@include font-face-italic('Poppins',Poppins-ExtraLightItalic, 200, italic);
+@include font-face-italic('Poppins',Poppins-LightItalic ,300, italic);
+@include font-face-italic('Poppins',Poppins-MediumItalic , 500, italic);
+@include font-face-italic('Poppins',Poppins-Italic,400, italic);
+@include font-face-italic('Poppins',Poppins-SemiBoldItalic, 600, italic);
+@include font-face-italic('Poppins',Poppins-ThinItalic,100, italic);
+
+//icomoon font-face function
+@font-face {
+  font-family: 'icomoon';
+  src:  url('#{$font-path}/icomoon.eot') format('embedded-opentype'),
+    url('#{$font-path}/icomoon.ttf') format('truetype'),
+    url('#{$font-path}/icomoon.woff') format('woff'),
+    url('#{$font-path}/icomoon.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+//icomoon font styling
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'icomoon' !important;
+  font-weight: $font-reg;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+}
+
+//icon fonts classes and codes
+.icon-edit-pencil::before {
+  content: "\e908";
+}
+.icon-bar-graph::before {
+  content: "\e902";
+}
+.icon-envelope-o::before {
+  content: "\f003";
+}
+.icon-download::before {
+  content: "\f019";
+}
+.icon-lock::before {
+  content: "\f023";
+}
+.icon-question-circle::before {
+  content: "\f059";
+}
+.icon-random::before {
+  content: "\f074";
+}
+.icon-shopping-cart::before {
+  content: "\f07a";
+}
+.icon-folder-open::before {
+  content: "\f07c";
+}
+.icon-cogs::before {
+  content: "\f085";
+}
+
+.icon-phone::before {
+  content: "\f095";
+}
+.icon-phone-square::before {
+  content: "\f098";
+}
+.icon-bullhorn::before {
+  content: "\f0a1";
+}
+.icon-globe::before {
+  content: "\f0ac";
+}
+.icon-briefcase::before {
+  content: "\f0b1";
+}
+
+.icon-users::before {
+  content: "\f0c0";
+}
+.icon-cloud::before {
+  content: "\f0c2";
+}
+.icon-flask::before {
+  content: "\f0c3";
+}
+.icon-money::before {
+  content: "\f0d6";
+}
+.icon-dashboard::before {
+  content: "\f0e4";
+}
+
+.icon-clipboard::before {
+  content: "\f0ea";
+}
+
+.icon-cloud-download::before {
+  content: "\f0ed";
+}
+.icon-desktop::before {
+  content: "\f108";
+}
+.icon-laptop1::before {
+  content: "\f109";
+}
+.icon-mobile::before {
+  content: "\f10b";
+}
+
+.icon-ticket::before {
+  content: "\f145";
+}
+.icon-handshake-o::before {
+  content: "\f2b5";
+}
+.icon-code::before {
+  content: "\e901";
+}
+.icon-clock::before {
+  content: "\e909";
+}
+.icon-headphones::before {
+  content: "\e910";
+}
+.icon-display::before {
+  content: "\e956";
+}
+.icon-laptop::before {
+  content: "\e957";
+}
+.icon-drive::before {
+  content: "\e963";
+}
+.icon-search::before {
+  content: "\e986";
+}
+.icon-menu::before {
+  content: "\e9bd";
+}
+.icon-star-full::before {
+  content: "\e9d9";
+}
+.icon-arrow-right::before {
+  content: "\ea3c";
+}
+.icon-tab::before {
+  content: "\ea45";
+}
+.icon-facebook::before {
+  content: "\ea90";
+}
+.icon-instagram::before {
+  content: "\ea92";
+}
+.icon-linkedin::before {
+  content: "\eaca";
+}
+.icon-trending_up::before {
+  content: "\e90a";
+}
+.icon-school::before {
+  content: "\e904";
+}
+.icon-security::before {
+  content: "\e905";
+}
+.icon-mouse::before {
+  content: "\e906";
+}
+.icon-phone_in_talk::before {
+  content: "\e907";
+}
+.icon-x::before {
+  content: "\e900";
+}
+.icon-paperplane::before {
+  content: "\e903";
+}
