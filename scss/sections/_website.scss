@@ -63,7 +63,12 @@
         }
 
 		.request-email-message {
-
+            color: $green;
+            font: size rem(15px);
+            line-height: rem(22px);
+            padding: 10px 0;
+            display:block;
+            text-align: center;
         }
 
         .button-row {
@@ -72,52 +77,77 @@
             justify-content: center;
             margin: 10px 0;
 
-		    .generate-img-current {
-                background-color: $red;
+		    .generate-img-current, .generate-img-new {
+                background-color: $grey;
             }
 
-		    .generate-img-new {
-                background-color: $red;
-            }
-
-            .generate-img-current:hover {
-                background-color: $hover-red;
-            }
-
-		    .generate-img-new:hover {
-                background-color: $hover-red;
+            .generate-img-current:hover, .generate-img-new:hover {
+                background-color: $hover-grey;
             }
 
 		    .request-new-email-message {
-
+                color: $green;
+                font: size rem(15px);
+                line-height: rem(22px);
+                padding: 10px 0;
+                display:block;
+                text-align: center;
+                flex-basis: 100%;
+                width: 100%;
             }
         }
     }
 
 	.img-form-box {
+        width: 100%;
+        color: $black;
+        background-color: $offwhite;
 
-		.img-form {
+		.img-form {           
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
 
 		    .form-field {
+                display: flex;
+                flex-flow: row wrap;
+                width:100%;
+                position: relative;
+                justify-content: normal;
+                align-items: normal;
+                margin: 0 0 10px;
 
 				label {
-
+                    display:block; 
+                    text-align: left;
                 }
 
                 .formtext {
-
+                    display:inline-flex;
+                    width:100%;
+                    border-radius: 5px;
+                    height: 39px;
+                    background-color: $offwhite;
                 }
 
                 .error-messege {
-
+                    color: $red;
+                    font: size rem(15px);
+                    line-height: rem(22px);
+                    padding: 10px 0;
+                    display:block;
+                    text-align: center;
+                    flex-basis: 100%;
+                    width: 100%;
                 }
 
 			    .submit {
-
+                    background-color: $dark;
                 }
 
                 .submit:hover {
-
+                    background-color: $hover-dark;
                 }
             }
         }
@@ -130,11 +160,11 @@
         }
 
 		.display-imgs {
-
+            background-color: $blue;
         }
 
         .display-imgs:hover {
-
+            background-color: $hover-blue;
         }
 
         .linked-imgs-container {
@@ -144,6 +174,12 @@
             }
 
             .linked-imgs-box {
+                display:flex;
+                flex-direction: column;
+
+                @media (min-width: $small) {
+                    flex-direction: row;
+                }
 
                 img {
 
