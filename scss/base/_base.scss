@@ -16,7 +16,11 @@ box-sizing: border-box;
 
 //used to remove certain containers with javascript
 .hidden {
-    display:none;
+    visibility:hidden;
+}
+
+.invisable {
+    display: none;
 }
 
 // standard html Elements

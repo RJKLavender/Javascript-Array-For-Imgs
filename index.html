@@ -17,20 +17,31 @@
 		<div class="Img-title">
 			<h1>Javascript Array Image Generator</h1>
 			<p></p>
+
+			<h2 id="currentemail">Current Email: Guest</h2>
 		</div>
 		<div class="img-box">
-			<button class="generate-img btn" type="button">Generate Image</button>
+			<div class="generate-button-row">
+				<button class="generate-img btn" type="button">Generate Image</button>
+				<button class="add-img btn" type="button">Add Image to Collection</button>
+			</div>
+			<div class="button-row">
+				<form id="selectemailbox">
+					<label for="selectemail">Select Email:</label>
+					<select id="selectemail" name="selectemail">
+					</select>
+					<button class="switch-email btn" type="submit">Switch Email</button>
+				</form>
+			</div>
+			<div class="messages">
+				<span class="message-text hidden invisible">blank</span>
+			</div>
 			<div class="img-container">
 			<!--html will be generate by script here-->
-			</div>
-			<span class="request-email-message hidden"></span>
-			<div class="button-row">
-				<button class="generate-img btn hidden" type="button">Generate Another Image for This Email</button>
-				<button class="generate-img btn hidden" type="button">Generate Image Img for New Email</button>
-				<span class="request-new-email-message hidden"></span>
+				<img id="img" src="" alt="" >
 			</div>
 		</div>
-		<div class="img-form-box">
+		<div id="img-form-box" class="img-form-box">
 			<form id="img-form" class="img-form">
 				<div class="form-field">
 					<label for="email">Email:</label>
@@ -41,13 +52,16 @@
 			</form>
 		</div>
 		<div class="linked-imgs-box">
-			<h2> All Images Linked To All Emails</h2>
-			<button class="display-imgs btn hidden" type="button">Display All Current Linked Images</button>
+			<h2 id="currentdisplayemail"> All Images For Current Email: Guest</h2>
+			<button class="display-imgs btn" type="button">Display All Images</button>
 			<!--html will be generate by script here-->
+			<div class="display-imgs-box">
+
+			</div>
 		</div>
 	</div>
 </div>
 
-<script src="javascript/images.js"></script>
+<script defer src="javascript/images.js"></script>
 </body>
 </html>

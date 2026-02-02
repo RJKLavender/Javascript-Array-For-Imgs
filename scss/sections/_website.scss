@@ -47,28 +47,28 @@
         justify-content: center;
         margin: 10px 0;
 
-		.generate-img {
-            background-color: $red;
-        }
+        .generate-button-row {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            margin: 10px 0;
 
-        .generate-img:hover {
-            background-color: $hover-red;
-        }
-
-		.img-container {
-            
-            img {
-
+		    .generate-img {
+                background-color: $red;
             }
-        }
 
-		.request-email-message {
-            color: $green;
-            font: size rem(15px);
-            line-height: rem(22px);
-            padding: 10px 0;
-            display:block;
-            text-align: center;
+            .generate-img:hover {
+                background-color: $hover-red;
+            }
+
+            .add-img {
+                background-color: $medgrey;
+            }
+
+            .add-img:hover {
+                background-color: $hover-grey;
+            }
+
         }
 
         .button-row {
@@ -77,23 +77,38 @@
             justify-content: center;
             margin: 10px 0;
 
-		    .generate-img-current, .generate-img-new {
-                background-color: $grey;
+            .selectemailbox {
+
+			    label {}
+                
+			    #selectemail {}
             }
 
-            .generate-img-current:hover, .generate-img-new:hover {
+            .switch-email {
+                background-color: $medgrey;
+            }
+
+            .switch-email:hover {
                 background-color: $hover-grey;
             }
+        }
+            .messages {
+                .message-text {
+                    color: $green;
+                    font: size rem(15px);
+                    line-height: rem(22px);
+                    padding: 10px 0;
+                    display:block;
+                    text-align: center;
+                    flex-basis: 100%;
+                    width: 100%;
+                }
+            }
 
-		    .request-new-email-message {
-                color: $green;
-                font: size rem(15px);
-                line-height: rem(22px);
-                padding: 10px 0;
-                display:block;
-                text-align: center;
-                flex-basis: 100%;
-                width: 100%;
+        .img-container {
+            
+            img {
+
             }
         }
     }
@@ -128,7 +143,7 @@
                     width:100%;
                     border-radius: 5px;
                     height: 39px;
-                    background-color: $offwhite;
+                    background-color: $white;
                 }
 
                 .error-messege {

@@ -1,7 +1,91 @@
-//generate img api
+//generate img api javascript for entire interface
+const url = `https://picsum.photos/v2/list?limit=100`;
 
-//Form validation 
-const form = document.getElementById('.img-form');
+//set variables and get needed feilds 
+const currentEmailTitle = document.getElementById('currentemail');
+const generateButton = document.querySelector('.generate-img');
+const addToCollection = document.querySelector('.add-img');
+const generateButtonRow = document.querySelector('generate-button-row');
+const buttonRow = document.querySelector('button-row');
+const switchEmail = document.querySelector('.switch-email');
+const selectEmailForm = document.getElementById('selectemailbox');
+const successMessage = document.querySelector('.message-text');
+const imgbox = document.querySelector('.img-container');
+const messages = document.querySelector('.messages');
+const form = document.getElementById('img-form');
+const formbox = document.getElementById('img-form-box');
+const currentEmailDisplayTitle = document.getElementById('currentdisplayemail');
+const displayImgs = document.querySelector('.display-imgs');
+const displayImgsBox = document.querySelector('.display-imgs-box');
+let currentEmail = ""; 
+
+// setting email list function
+const getemailList = () => {
+    if (!localStorage.getItem("emailList")) {
+        let emailList = ['guest'];
+        localStorage.setItem("emailList", JSON.stringify(emailList));
+    } 
+    return JSON.parse(localStorage.getItem("emailList"));
+}
+
+function checkStatus(response) {
+    if (response.ok) {
+        return Promise.resolve(response);
+    } else {
+        return Promise.reject(new Error(response.statusText));
+    }
+}
+
+function fetchapi(url) {
+    return fetch(url)
+    .then(checkStatus)
+    .then(response => response.json())
+    .catch(error => console.log('error with loading imgs', error))
+}
+
+function imgrandom(data) {
+        const randomPhoto = data[Math.floor(Math.random() * data.length)];
+        
+        const photoId = randomPhoto.id; 
+        const photoAuthor = randomPhoto.author;
+        const photoUrl = randomPhoto.download_url;
+
+        let img = document.querySelector('.img-container img');
+        img.id = photoId;
+        img.src = photoUrl;
+        img.alt = `Photo by ${photoAuthor}`;
+
+        const currentPhoto = randomPhoto;
+
+        return currentPhoto;
+}
+
+fetchapi(url).then(data => imgrandom(data));
+
+// set email selection options
+const emails = () => {
+    let selectionList = getemailList();
+
+    let options = ['guest'];
+
+    let selectEmailOption = document.getElementById('selectemail');
+
+    // Generate Options
+    for ( i = 0; i < selectionList.length; i++) {
+        let option = document.createElement("option");
+        option.value = selectionList[i];
+        option.text = selectionList[i];
+        options.push(option);
+    }
+
+    selectEmailOption.replaceChildren(...options);
+
+    currentEmail = 'guest';
+    return currentEmail;
+}
+
+getemailList();
+emails();
 
 //Resets the form field errors allowing them to send more messeges later
 const resetFields = formToReset => {
@@ -24,6 +108,137 @@ const resetFields = formToReset => {
     });
 };
 
+const generateImagefuc = () => {
+    
+    if (localStorage.getItem('imageList')) {
+        let imageList = JSON.parse(localStorage.getItem('imageList'));
+
+        ImageData = getImages(imageList);
+        return ImageData;
+    }
+}
+
+//saving email function 
+const saveemail = () => {
+
+    let email = form.elements.email.value;
+
+    let emailList = JSON.parse(localStorage.getItem("emailList"));
+
+    emailList.push(email);
+
+    localStorage.setItem("emailList", JSON.stringify(emailList));
+
+    let select = document.getElementById('selectemail');
+
+    const option = document.createElement('option');
+    option.text = email;
+    option.value = email;
+    select.add(option);
+
+    resetFields(form);
+
+    currentEmailDisplayTitle.textContent = `All Images For Current Email: ${email}`;
+    currentEmailTitle.textContent = `Current Email: ${email}`;
+    form.classList.add('hidden');
+    formbox.style.display = 'none';
+    messages.style.display = 'block';
+    successMessage.textContent = `${email} has been successfuily added to email list.`;
+    successMessage.classList.remove('hidden');
+    successMessage.classList.remove('invisible');
+    buttonRow.classList.remove('hidden');
+
+    fetchapi(url).then(data => imgrandom(data));
+
+    currentEmail = email;
+
+    return currentEmail;
+}
+
+generateButton.addEventListener('click', () => {
+  fetchapi(url).then(data => imgrandom(data));
+});
+
+addToCollection.addEventListener('click', () => {
+
+    let imgarray = {};
+
+    if (localStorage.getItem(currentEmail)) {
+        imgarray = JSON.parse(localStorage.getItem(currentEmail));
+    }
+
+    if (ImgData.id in imgarray) {
+        successMessage.textContent = `Current image could not be added to ${CurrentEmail} image collection.`;
+        successMessage.style.color = '#d64541';
+        successMessage.classList.remove('hidden');
+        successMessage.classList.remove('invisible');
+    } else {
+        let img = document.querySelector('.img-container img');
+
+        let imageData = {
+        id: imgElement.id,
+        src: imgElement.src,
+        alt: imgElement.alt 
+        }
+
+        imgarray[imageData.id] = imageData;
+        localStorage.setItem(currentEmail, JSON.stringify(imgarray));
+
+        successMessage.textContent = `Current image has been successfully added to ${CurrentEmail} image collection.`;
+        successMessage.style.color = '#10d53b';
+        successMessage.classList.remove('hidden');
+        successMessage.classList.remove('invisible');
+    }
+
+});
+
+selectEmailForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const selection = selectEmailOption.value
+    currentEmailDisplayTitle.textContent = `All Images For Current Email: ${selection}`;
+    currentEmailTitle.textContent = `Current Email: ${selection}`;
+    successMessage.textContent = `current email has been successfully changed to ${selection}.`;
+    successMessage.classList.remove('hidden');
+    successMessage.classList.remove('invisible');
+
+    currentEmail = selection;
+});
+
+displayImgs.addEventListener('click', () => {
+
+    let displayContainer = document.querySelector('.display-imgs-box');
+    
+    // Clear the container first to avoid duplicating images on every click
+    displayContainer.innerHTML = '';
+
+    // Retrieve the data from local storage
+    const storedData = localStorage.getItem(currentEmail);
+
+    if (storedData) {
+        // Convert string back into an object
+        let imgarray = JSON.parse(storedData);
+
+        // 4. Loop through the object properties
+        Object.values(imgarray).forEach(imageData => {
+            // reate a new image element
+            let newImg = document.createElement('img');
+            
+            // Assign the stored values
+            newImg.id = imageData.id;
+            newImg.src = imageData.src;
+            newImg.alt = imageData.alt;
+
+            // Append the image to the display container
+            displayContainer.appendChild(newImg);
+        });
+    } else {
+        displayContainer.textContent = "No images found for this collection.";
+    }
+
+});
+
+//Form validation 
 //validate form function
 const validateForm = () => {
 form.setAttribute('novalidate', '');
@@ -97,20 +312,26 @@ const validateformField = formField => {
         console.log('Field infomation has been entered correctly')
 
         //save email value to variable
-        const email  = input.value;
+       const email = form.elements.email.value;
 
-        //save to array
-        //checks if local stoarge already has an email then sets new local storage value
+       //check if email already exists
+       let emailList = JSON.parse(localStorage.getItem("emailList"));
 
-        // set local storage to email value 
-        // set local storage with img file id/name
-    
-        // make object array of email and image
-        // add email and image ohject array
+       if (emailList.includes(email)) {
+            errorSpan.textContent = `current ${label.textContent} already exists`;
+            errorSpan.classList.remove('hidden');
+            formFieldError = true;
+        } 
+        
+        if (!formFieldError) {
+            saveemail();
+        }
+
     }
     
     //logs the value of the field
     console.log(input.value);
+
     return formFieldError;
 };
 
@@ -132,8 +353,9 @@ const validateFormFields = formToValidate => {
         if (allValid) {
             //logs if they are correct then submits the form
         console.log('All fields are valid! Proceed with submit.');
-        resetFields(form);
-        form.submit(); 
+
+
+       // form.submit(); 
     } else {
         // if errors found will log and not submit and will wait until errors are fixed and form is resubmitted to test again
         console.log('Some fields have errors.');
@@ -164,9 +386,4 @@ const validateFormFields = formToValidate => {
 resetFields(form);
 validateForm();
 
-// new image geranation for same email
-
-//new image generation for new email
-
-//display imgs and email saved in local storage
 
