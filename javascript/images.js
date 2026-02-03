@@ -62,15 +62,13 @@ function imgrandom(data) {
 
 fetchapi(url).then(data => imgrandom(data));
 
-// set email selection options
 const emails = () => {
     let selectionList = getemailList();
 
     let options = ['guest'];
 
     let selectEmailOption = document.getElementById('selectemail');
-
-    // Generate Options
+    
     for ( i = 0; i < selectionList.length; i++) {
         let option = document.createElement("option");
         option.value = selectionList[i];
@@ -100,23 +98,10 @@ const resetFields = formToReset => {
         input.value = '';
         input.style.borderColor = '#2c2c2c';
         errorSpan.textContent = '';       
-        errorSpan.classList.add('hidden');
+        errorSpan.classList.add('invisble');
 
-        //resets original margin
-        input.style.marginBottom = '20px';
-        Field.style.marginBottom = '0';
     });
 };
-
-const generateImagefuc = () => {
-    
-    if (localStorage.getItem('imageList')) {
-        let imageList = JSON.parse(localStorage.getItem('imageList'));
-
-        ImageData = getImages(imageList);
-        return ImageData;
-    }
-}
 
 //saving email function 
 const saveemail = () => {
@@ -167,24 +152,26 @@ addToCollection.addEventListener('click', () => {
         imgarray = JSON.parse(localStorage.getItem(currentEmail));
     }
 
-    if (ImgData.id in imgarray) {
-        successMessage.textContent = `Current image could not be added to ${CurrentEmail} image collection.`;
+    let imgElement = document.querySelector('.img-container img');
+
+    let imgData = {
+        id: imgElement.id,
+        src: imgElement.src,
+        alt: imgElement.alt 
+    }
+
+    if (imgData.id in imgarray) {
+        successMessage.textContent = `Current image could not be added to ${currentEmail} image collection.`;
         successMessage.style.color = '#d64541';
         successMessage.classList.remove('hidden');
         successMessage.classList.remove('invisible');
     } else {
         let img = document.querySelector('.img-container img');
 
-        let imageData = {
-        id: imgElement.id,
-        src: imgElement.src,
-        alt: imgElement.alt 
-        }
-
-        imgarray[imageData.id] = imageData;
+        imgarray[imgData.id] = imgData;
         localStorage.setItem(currentEmail, JSON.stringify(imgarray));
 
-        successMessage.textContent = `Current image has been successfully added to ${CurrentEmail} image collection.`;
+        successMessage.textContent = `Current image has been successfully added to ${currentEmail} image collection.`;
         successMessage.style.color = '#10d53b';
         successMessage.classList.remove('hidden');
         successMessage.classList.remove('invisible');
@@ -195,10 +182,12 @@ addToCollection.addEventListener('click', () => {
 selectEmailForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
+    let selectEmailOption = document.getElementById('selectemail');
+
     const selection = selectEmailOption.value
     currentEmailDisplayTitle.textContent = `All Images For Current Email: ${selection}`;
     currentEmailTitle.textContent = `Current Email: ${selection}`;
-    successMessage.textContent = `current email has been successfully changed to ${selection}.`;
+    successMessage.textContent = `Current Email has been successfully changed to ${selection}.`;
     successMessage.classList.remove('hidden');
     successMessage.classList.remove('invisible');
 
@@ -220,14 +209,14 @@ displayImgs.addEventListener('click', () => {
         let imgarray = JSON.parse(storedData);
 
         // 4. Loop through the object properties
-        Object.values(imgarray).forEach(imageData => {
+        Object.values(imgarray).forEach(imgData => {
             // reate a new image element
             let newImg = document.createElement('img');
             
             // Assign the stored values
-            newImg.id = imageData.id;
-            newImg.src = imageData.src;
-            newImg.alt = imageData.alt;
+            newImg.id = imgData.id;
+            newImg.src = imgData.src;
+            newImg.alt = imgData.alt;
 
             // Append the image to the display container
             displayContainer.appendChild(newImg);
@@ -268,7 +257,7 @@ const validationOptions = [
             const patternRegEx = new RegExp(input.pattern);
             return patternRegEx.test(input.value);
         },
-        errorMessage: (input, label) => `Is Not a Valid ${label.textContent}`
+        errorMessage: (input, label) => `This is Not a Valid Email`
     }
 ]
 
@@ -288,11 +277,9 @@ const validateformField = formField => {
             //changes the border to red, adds the error icon and error messege
             input.style.borderColor = '#C52626';
             errorSpan.textContent = option.errorMessage(input, label);
-            errorSpan.classList.remove('hidden');
+            errorSpan.classList.remove('invisible');
             
             //sets new margin since there is an error
-            input.style.marginBottom = '0';
-            formField.style.marginBottom = '20px';
             console.log('Errors with the infomation that has been entered into the field')
 
             //since error was found sets the error value to true
@@ -306,9 +293,8 @@ const validateformField = formField => {
         //changes the border back to normal, remove the error messege and adds the success icon to confirm it is entered correctly
         input.style.borderColor = '#2c2c2c';
         errorSpan.textContent = '';       
-        errorSpan.classList.add('hidden');
-        input.style.marginBottom = '20px';
-        formField.style.marginBottom = '0';
+        errorSpan.classList.add('invisible');
+        
         console.log('Field infomation has been entered correctly')
 
         //save email value to variable
@@ -319,7 +305,7 @@ const validateformField = formField => {
 
        if (emailList.includes(email)) {
             errorSpan.textContent = `current ${label.textContent} already exists`;
-            errorSpan.classList.remove('hidden');
+            errorSpan.classList.remove('invisible');
             formFieldError = true;
         } 
         

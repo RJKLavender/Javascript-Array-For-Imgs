@@ -2,8 +2,7 @@
 
 .container {
     margin: 25px auto;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 7px 10px;
     border: 2px solid $dark;
     border-radius: 10px;
     background-color: $white;
@@ -26,18 +25,25 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 10px;
+    padding: 0 10px;
 
     .img-title {
-        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
 
         h1 {
             padding: 10px 0;
             margin-bottom:10px;
+            text-align: center;
+            font-weight: $font-bold;
+            color:$dark;
         }
 
-        p {
-
+        h2 {
+            text-align: center;
+            font-weight: $font-semibold;
+            margin-bottom:10px;
         }
     }
 
@@ -49,9 +55,10 @@
 
         .generate-button-row {
             display: flex;
-            flex-flow: row wrap;
+            flex-direction: row;
+            flex-wrap: wrap;
             justify-content: center;
-            margin: 10px 0;
+            margin: 5px 0;
 
 		    .generate-img {
                 background-color: $red;
@@ -73,42 +80,83 @@
 
         .button-row {
             display: flex;
-            flex-flow: row wrap;
+            flex-direction: row;
+            flex-wrap: wrap;
             justify-content: center;
-            margin: 10px 0;
+            margin: 5px 0;
 
-            .selectemailbox {
+            #selectemailbox {
+                display: flex;
+                flex-flow: row Wrap;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
 
-			    label {}
+			    label { 
+                    margin-right: 8px}
+                    font-size: rem(18px);
+                    margin-bottom: 8px;
+
+                    @media (min-width: $small) {
+                        margin-bottom: 0;
+                    }
                 
-			    #selectemail {}
-            }
+			    select {
+                    font-size: rem(18px);
+                    border-radius: 5px;
+                    text-align: center;
+                    margin-right: 8px;
+                    text-transform: uppercase;
+                    margin-bottom: 8px;
 
-            .switch-email {
-                background-color: $medgrey;
-            }
+                    @media (min-width: $small) {
+                        margin-bottom: 0;
+                    }
+                }
 
-            .switch-email:hover {
-                background-color: $hover-grey;
+                .switch-email {
+                    background-color: $medgrey;
+                }
+
+                .switch-email:hover {
+                    background-color: $hover-grey;
+                }
             }
         }
             .messages {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                text-align:center;
+                margin-bottom: 5px;
+
                 .message-text {
                     color: $green;
-                    font: size rem(15px);
-                    line-height: rem(22px);
-                    padding: 10px 0;
-                    display:block;
+                    font-size: rem(16px);
+                    padding: 0;
+                    margin: -5px 0 10px;
                     text-align: center;
                     flex-basis: 100%;
-                    width: 100%;
                 }
             }
 
         .img-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 3px;
+            border: 2px solid $black;
+            padding:15px;
+            margin: 0 5px 10px;
+            height:300px;
+            width: 100%;
+
             
             img {
-
+                object-fit: cover;
+                height: 100%;
+                width: 100%;
+                border-radius: 5px;
             }
         }
     }
@@ -116,12 +164,22 @@
 	.img-form-box {
         width: 100%;
         color: $black;
-        background-color: $offwhite;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+        h2 {
+            font-weight: $font-semibold;
+            margin-bottom:10px;
+        }
 
 		.img-form {           
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
             text-align: center;
 
 		    .form-field {
@@ -129,49 +187,58 @@
                 flex-flow: row wrap;
                 width:100%;
                 position: relative;
-                justify-content: normal;
-                align-items: normal;
-                margin: 0 0 10px;
+                justify-content: center;
+                align-items: center;
+                text-align:center;
+                margin: 10px 0 8px;
 
 				label {
                     display:block; 
-                    text-align: left;
+                    margin-right: 8px;
+                    font: size rem(16px);
                 }
 
                 .formtext {
-                    display:inline-flex;
-                    width:100%;
                     border-radius: 5px;
-                    height: 39px;
-                    background-color: $white;
+                    background-color: $offwhite;
+                    font: size rem(16px);
+                    color: $dark;
+                    width: 200px;
+                    margin: 0 8px 0 0;
+                    padding:5px;
                 }
 
-                .error-messege {
+                .error-message {
                     color: $red;
-                    font: size rem(15px);
-                    line-height: rem(22px);
-                    padding: 10px 0;
-                    display:block;
+                    font: size rem(16px);
+                    margin-top: 5px;
+                    padding: 5px 0;
                     text-align: center;
                     flex-basis: 100%;
                     width: 100%;
                 }
+            }
 
-			    .submit {
-                    background-color: $dark;
-                }
+            .submit {
+                background-color: $dark;
+            }
 
-                .submit:hover {
-                    background-color: $hover-dark;
-                }
+            .submit:hover {
+                background-color: $hover-dark;
             }
         }
     }
 
 	.linked-imgs-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
 
 		h2 {
-
+            font-weight: $font-semibold;
+            margin-bottom:10px;
         }
 
 		.display-imgs {
@@ -182,23 +249,17 @@
             background-color: $hover-blue;
         }
 
-        .linked-imgs-container {
-
-            h3 {
-
-            }
-
-            .linked-imgs-box {
-                display:flex;
-                flex-direction: column;
-
-                @media (min-width: $small) {
-                    flex-direction: row;
-                }
-
-                img {
-
-                }
+        .display-imgs-box {
+            display:flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            
+            img {
+                object-fit: cover;
+                height: 200px;
+                width: 300px;
+                border: 2px solid $black;
+                margin: 10px;
             }
         }
     }
@@ -206,7 +267,7 @@
 
 .btn {
     color: $white;
-    font-size: 18px;
+    font-size: rem(16px);
     padding: 10px 15px;
     border-radius: 5px;
     margin: 10px;
