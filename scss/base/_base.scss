@@ -92,3 +92,8 @@ strong {
 input, textarea, select {
     font-family: inherit;
 }
+
+::placeholder {
+  color: $medgrey;
+  opacity: 1;
+}
