@@ -7,7 +7,7 @@ letter-spacing: 0.4px;
 font-size: $base-font-size;
 line-height: ($base-line-height/$base-font-size); //line height calcuation for the base font outputs 1.5
 font-weight: $font-reg;
-background-color: rgba(82, 164, 245, 0.822);
+background-color: rgba(168, 168, 168, 1);
 
 }
 
@@ -16,12 +16,8 @@ box-sizing: border-box;
 }
 
 //used to remove certain containers with javascript
-.hidden {
-    visibility:hidden;
-}
-
 .invisible {
-    display: none;
+    display: none !important;
 }
 
 // standard html Elements
@@ -95,8 +91,4 @@ strong {
 
 input, textarea, select {
     font-family: inherit;
-}
-
-1mg {
-    
 }

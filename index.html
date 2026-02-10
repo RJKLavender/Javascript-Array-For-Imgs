@@ -16,15 +16,15 @@
 	<div class="img-generator-box">
 		<div class="img-title">
 			<h1>Javascript Array Image Generator</h1>
-			<p></p>
-
 			<h2 id="currentemail">Current Email: Guest</h2>
 		</div>
+		<!--button container-->
 		<div class="img-box">
 			<div class="generate-button-row">
 				<button class="generate-img btn" type="button">Generate Image</button>
 				<button class="add-img btn" type="button">Add Image to Collection</button>
 			</div>
+			<!--Switch Email Form-->
 			<div class="button-row">
 				<form id="selectemailbox">
 					<label for="selectemail">Select Email:</label>
@@ -34,15 +34,16 @@
 				</form>
 			</div>
 			<div class="messages">
-				<span class="message-text hidden invisible">blank</span>
+				<span class="message-text invisible">blank</span>
 			</div>
 			<div class="img-container">
 			<!--html will be generate by script here-->
 				<img id="img" src="" alt="" >
 			</div>
 		</div>
+		<!--New Email Form-->
 		<div id="img-form-box" class="img-form-box">
-			<h2>Email Form</h2>
+			<h2>New Email Form</h2>
 			<form id="img-form" class="img-form">
 				<div class="form-field">
 					<label for="email">Email:</label>
@@ -51,7 +52,11 @@
 				</div>
 				<button class="submit btn" type="submit">Submit</button>
 			</form>
+			<div class="messages2">
+				<span class="message-text2 invisible">blank</span>
+			</div>
 		</div>
+		<!--Display Imgs Box-->
 		<div class="linked-imgs-box">
 			<h2 id="currentdisplayemail"> All Images For Current Email: Guest</h2>
 			<button class="display-imgs btn" type="button">Display All Images</button>
@@ -63,6 +68,14 @@
 	</div>
 </div>
 
+<!-- Dialog Window For Img Display in Larger version -->
+<dialog id="image-dialog" closedby="any">
+  <img src="" alt="Enlarged View">
+  <p>Click Outside The Image To Close</p>
+</dialog>
+
 <script defer src="javascript/images.js"></script>
+
+
 </body>
 </html>
