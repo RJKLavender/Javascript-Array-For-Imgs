@@ -22,6 +22,8 @@ const currentEmailDisplayTitle = document.getElementById('currentdisplayemail');
 const displayImgs = document.querySelector('.display-imgs');
 const displayImgsBox = document.querySelector('.display-imgs-box');
 const errorSpanMessage = document.querySelector('.error-message');
+const clearDisplay = document.querySelector('.clear-imgs');
+const removeImage = document.querySelector('.remove-img');
 
 //email variable set to global
 let currentEmail = ""; 
@@ -202,11 +204,99 @@ addToCollection.addEventListener('click', () => {
         successMessage.style.color = '#10d53b';
         successMessage.classList.remove('invisible');
 
-        ///resets display images container ready for new images to be displayed
+        // updates the display container for new image
         let displayContainer = document.querySelector('.display-imgs-box');
-        displayContainer.classList.add('invisible');
+
+        let hasImgChild = displayContainer.querySelector(':scope > img') !== null;
+        
+        if (hasImgChild) {
+
+            let newImg = document.createElement('img');
+            
+            newImg.id = imgData.id;
+            newImg.src = imgData.src;
+            newImg.alt = imgData.alt;
+
+            displayContainer.appendChild(newImg);
+
+            //reruns the dialog function so can be used for the new images
+            DisplayLargeImg();
+        } else {
+
+            let hasSpan = displayContainer.querySelector(':scope > span') !== null;
+
+            if (hasSpan) {
+
+            let span = document.querySelector('.display-imgs-box span');
+
+            displayContainer.removeChild(span);
+
+            let newImg = document.createElement('img');
+            
+            newImg.id = imgData.id;
+            newImg.src = imgData.src;
+            newImg.alt = imgData.alt;
+
+            displayContainer.appendChild(newImg);
+
+            //reruns the dialog function so can be used for the new images
+            DisplayLargeImg();
+            }
+        }
     }
 });
+
+//remove from collection button function
+removeImage.addEventListener('click', () => {
+
+    let imgarray= JSON.parse(localStorage.getItem(currentEmail)) || {};
+
+    let imgElement = document.querySelector('.img-container img');
+    // gets values of image
+    let imgDataId = imgElement.id;
+    
+    //if image is already in local storage then proceed
+    if (imgDataId in imgarray) {
+    
+        // if the current image is in the array then remove it from local storage and display successfull message
+
+        delete imgarray[imgDataId];
+        localStorage.setItem(currentEmail, JSON.stringify(imgarray));
+
+        successMessage.textContent = `Current image has been successfully removed from ${currentEmail} images collection.`;
+        successMessage.style.color = '#10d53b';
+        successMessage.classList.remove('invisible');
+        
+        //update display container for removed image
+        let displayContainer = document.querySelector('.display-imgs-box');
+
+        let hasImgChild = displayContainer.querySelector(':scope > img') !== null;
+        
+        if (hasImgChild) {
+
+            let currentImg = document.querySelector(`.display-imgs-box img[id="${imgDataId}"]`);
+            
+            displayContainer.removeChild(currentImg);
+             
+            //if there is no images left after removed current image add span instead to tell the user that it is empty
+            if (!hasImgChild) {
+                let span = document.createElement('span');
+                displayContainer.appendChild(span);
+                span.textContent = "No images found in this collection.";
+            } else {
+                //reruns the dialog function so can be used for the updated collection
+                DisplayLargeImg();
+            }
+        }
+
+    //if image is not in collection then display error messege
+    } else {
+        successMessage.textContent = `Current image is not in ${currentEmail} image collection.`;
+        successMessage.style.color = '#d64541';
+        successMessage.classList.remove('invisible');
+    }
+});
+
 
 // select email form function which triggers on button click/submit of form
 selectEmailForm.addEventListener('submit', (e) => {
@@ -309,6 +399,17 @@ displayImgs.addEventListener('click', () => {
     }
 });
 
+//clear display of images by using replacechildren method
+clearDisplay.addEventListener('click', () => {
+
+    let displayContainer = document.querySelector('.display-imgs-box');
+
+    displayContainer.replaceChildren();
+
+    displayContainer.classList.add('invisible');
+
+});
+
 //Form validation 
 //validate form function
 const validateForm = () => {
@@ -393,7 +494,6 @@ const validateformField = formField => {
 
     return formFieldError;
 };
-
 
 //pulls the formfield into an array for each selector in formfield
 const validateFormFields = formToValidate => {

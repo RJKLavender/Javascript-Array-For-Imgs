@@ -65,19 +65,27 @@
             margin: 5px 0;
 
 		    .generate-img {
-                background-color: $red;
-            }
-
-            .generate-img:hover {
-                background-color: $hover-red;
-            }
-
-            .add-img {
                 background-color: $medgrey;
             }
 
-            .add-img:hover {
+            .generate-img:hover {
                 background-color: $hover-grey;
+            }
+
+            .add-img {
+                background-color: $green;
+            }
+
+            .add-img:hover {
+                background-color: $hover-green;
+            }
+
+            .remove-img {
+                background-color: $red;
+            }
+
+            .remove-img:hover {
+                background-color: $hover-red;
             }
 
         }
@@ -303,12 +311,28 @@
             margin-bottom:10px;
         }
 
-		.display-imgs {
-            background-color: $blue;
-        }
+        .display-button-row {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 5px 0;
 
-        .display-imgs:hover {
-            background-color: $hover-blue;
+		    .display-imgs {
+                background-color: $blue;
+            }
+
+            .display-imgs:hover {
+                background-color: $hover-blue;
+            }
+
+            .clear-imgs {
+                background-color: $medgrey;
+            }
+
+            .clear-imgs:hover {
+                background-color: $hover-grey;
+            }
         }
 
         // this is where the images in collection will be shown and styled accordingly
