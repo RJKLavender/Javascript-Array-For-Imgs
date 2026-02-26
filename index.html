@@ -37,18 +37,13 @@
 			<div class="messages">
 				<span class="message-text invisible">blank</span>
 			</div>
-			<div class="img-container">
-			<!--html will be generate by script here-->
-				<img id="img" src="#" alt="#">
-			</div>
-		</div>
-		<!--New Email Form-->
+			<!--New Email Form-->
 		<div id="img-form-box" class="img-form-box">
 			<h2>New Email Form</h2>
 			<form id="img-form" class="img-form">
 				<div class="form-field">
 					<label for="email">Email:</label>
-					<input id="email" class="email formtext" name="email" type="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" placeholder="Email" required>
+					<input id="email" class="email formtext" name="email" type="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\s\w+)?$" placeholder="Email" required>
 					<span class="error-message invisible"></span>
 				</div>
 				<button class="submit btn" type="submit">Submit</button>
@@ -57,6 +52,12 @@
 				<span class="message-text2 invisible">blank</span>
 			</div>
 		</div>
+			<div class="img-container">
+			<!--html will be generate by script here-->
+				<img id="img" src="#" alt="#">
+			</div>
+		</div>
+		
 		<!--Display Imgs Box-->
 		<div class="linked-imgs-box">
 			<h2 id="currentdisplayemail"> All Images For Current Email: Guest</h2>
