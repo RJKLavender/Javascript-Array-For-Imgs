@@ -8,6 +8,7 @@
     border-radius: 10px;
     background-color: $white;
     color: $black;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 
     @media (min-width: $small) {
         width: 750px;
@@ -33,6 +34,10 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        margin-bottom: 0;
+        
+        border-bottom: 3px solid $black;
+        padding-bottom: 15px;
 
         h1 {
             padding: 10px 0;
@@ -45,7 +50,8 @@
         h2 {
             text-align: center;
             font-weight: $font-semibold;
-            margin-bottom:10px;
+            margin-bottom:5px;
+            color:$medgrey;
         }
     }
 
@@ -62,14 +68,16 @@
             flex-direction: row;
             flex-wrap: wrap;
             justify-content: center;
-            margin: 5px 0;
+            margin: 5px 0 3px;
+            border-top: 3px solid $black;
+            padding: 5px 0 0;
 
 		    .generate-img {
-                background-color: $medgrey;
+                background-color: $sky;
             }
 
             .generate-img:hover {
-                background-color: $hover-grey;
+                background-color: $hover-sky;
             }
 
             .add-img {
@@ -90,43 +98,73 @@
 
         }
 
+        .forms-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 0;
+
+            @media (min-width: $medium) {
+                flex-direction: row;
+                margin:0 10px;
+            }
+
         //form container for the switching of emails form
         .button-row {
             display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
+            flex-direction: column;
             justify-content: center;
+            align-items: center;
+            text-align: center;
             margin:0;
+            padding: 5px 0 10px;
+
+            @media (min-width: $small) {
+                 min-height: 195.8px;
+                width: 50%
+            }
+
+            h2 {
+                font-weight: $font-semibold;
+                margin-bottom:0;
+                text-align: center;
+            }
 
             #selectemailbox {
                 display: flex;
-                flex-flow: column nowrap;
+                flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                width: 100%;
+                margin: 10px 0 0;
 
-                @media (min-width: $small) {
-                    flex-flow: row wrap;
+
+                @media (min-width: $medium) {
+                    flex-direction: row;
                 }
 
 			    label { 
                     font-size: rem(16px);
-                    margin-bottom: 10px;
+                    margin:0;
 
-                    @media (min-width: $small) {
-                        margin-bottom: 0;
-                        margin-right: 8px}
-                    }
+                    @media (min-width: $medium) {
+                        margin-right: 8px
+                    }   
+                }
                 
 			    select {
                     font-size: rem(16px);
                     border-radius: 5px;
                     text-align: center;
+                    max-width: 200px;
+                    text-overflow: ellipsis;
+                    background-color: $grey;
+                    height: 30px;
                     
                     text-transform: uppercase;
-                    margin-bottom: 10px;
+                    margin-bottom: 5px;
                 
-                    @media (min-width: $small) {
+                    @media (min-width: $medium) {
                         margin-bottom: 0;
                         margin-right: 8px;
                     }
@@ -140,24 +178,132 @@
                     background-color: $hover-grey;
                 }
             }
-        }   // success messaeges styling
+           // success messaeges styling
             .messages {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 text-align:center;
-                margin-bottom: 15px;
 
                 .message-text {
                     color: $green;
                     font-size: rem(18px);
                     padding: 0;
-                    margin: -5px 0 0;
+                    margin: 0 0 5px;
                     text-align: center;
                     flex-basis: 100%;
                     font-weight: $font-semibold;
+                    transition: all 0.5s ease;
                 }
             }
+        }
+            // form container for email entering
+	.img-form-box {
+        
+        color: $black;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-top: 0;
+        padding: 5px 0 10px;
+
+        @media (min-width: $small) {
+            min-height: 195.8px;
+                width: 50%
+        }
+
+        h2 {
+            font-weight: $font-semibold;
+            margin-bottom:0;
+            text-align: center;
+        }
+
+		.img-form {           
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-top: 10px;
+
+            @media (min-width: $medium) {
+                flex-direction: row;
+            }
+
+            // field wrapper with all field styling inside
+		    .form-field {
+                display: flex;
+                flex-direction: column;
+                width:100%;
+                position: relative;
+                justify-content: center;
+                align-items: center;
+                text-align:center;
+                margin: 10px 0 5px;
+
+                @media (min-width: $medium) {
+                    flex-direction: row;
+                }
+
+				label {
+                    display:block; 
+                    margin:0;
+                    font-size: rem(16px);
+
+                    @media (min-width: $medium) {
+                        margin-right: 8px;
+                    }
+
+                }
+
+                .formtext {
+                    border-radius: 5px;
+                    background-color: $grey;
+                    font-size: rem(16px);
+                    color: $dark;
+                    width: 200px;
+                    margin: 0;
+                    padding:5px;
+                    height: 30px;
+
+                    @media (min-width: $medium) {
+                        margin-right: 8px;
+                    }
+                }
+            }
+
+            .submit {
+                background-color: $medgrey;
+            }
+
+            .submit:hover {
+                background-color: $hover-grey;
+            }
+        }
+
+         // success messaeges styling
+        .messages2 {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                text-align:center;
+
+                .message-text2 {
+                    color: $green;
+                    font-size: rem(18px);
+                    padding: 0;
+                    margin: 0 0 5px;
+                    text-align: center;
+                    flex-basis: 100%;
+                    font-weight: $font-semibold;
+                    transition: all 0.5s ease;
+                }
+            }
+    }
+
+    }
 
         // Generated image box and img styling
         .img-container {
@@ -167,12 +313,11 @@
             border-radius: 3px;
             border: 2px solid $black;
             padding:0;
-            margin: 25px auto;
+            margin: 0 auto 25px;
             height:300px;
             transition: all 0.5s;
             max-width:300px;
             aspect-ratio: 4 / 3; 
-            
 
             // adjusts image size based on screen size            
             @media (min-width: $small) {
@@ -182,15 +327,14 @@
             }
 
             @media (min-width: $medium) {
-                height:400px;
+                height:350px;
                 max-width: 800px;
                 
             }
 
             @media (min-width: $large) {
-                height:500px;
-                max-width: 1000px;
-                
+                height:400px;
+                max-width: 900px;
             }
 
             img {
@@ -201,100 +345,27 @@
                 font-size: 0;
             }
         }
-    }
-
-    // form container for email entering
-	.img-form-box {
-        width: 100%;
-        color: $black;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        margin-top: 0;
-        border-top: 3px solid $black;
-        border-bottom: 3px solid $black;
-        padding-top: 15px;
-
-        h2 {
-            font-weight: $font-semibold;
-            margin-bottom:10px;
-        }
-
-		.img-form {           
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-
-            // field wrapper with all field styling inside
-		    .form-field {
-                display: flex;
-                flex-flow: row wrap;
-                width:100%;
-                position: relative;
-                justify-content: center;
-                align-items: center;
-                text-align:center;
-                margin: 10px 0 0px;
-
-				label {
-                    display:block; 
-                    margin-right: 8px;
-                    font-size: rem(16px);
-                }
-
-                .formtext {
-                    border-radius: 5px;
-                    background-color: $offwhite;
-                    font-size: rem(16px);
-                    color: $dark;
-                    width: 200px;
-                    margin: 0 8px 0 0;
-                    padding:5px;
-                }
-
-                .error-message {
-                    color: $red;
-                    font-size: rem(16px);
-                    margin-top: 5px;
-                    padding: 5px 0;
-                    text-align: center;
-                    flex-basis: 100%;
-                    width: 100%;
-                }
-            }
-
-            .submit {
-                background-color: $dark;
-            }
-
-            .submit:hover {
-                background-color: $hover-dark;
-            }
-        }
-
-         // success messaeges styling
-        .messages2 {
+        .messages3 {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 text-align:center;
-                margin-bottom: 10px;
+                margin-bottom: 5px;
 
-                .message-text2 {
+                .message-text3 {
                     color: $green;
                     font-size: rem(18px);
                     padding: 0;
-                    margin: 10px 0;
+                    margin: 0 0 5px;
                     text-align: center;
                     flex-basis: 100%;
                     font-weight: $font-semibold;
+                    transition: all 0.5s ease;
                 }
             }
     }
+
+    
 
     //displayed images container with title and button
 	.linked-imgs-box {
@@ -328,11 +399,11 @@
             }
 
             .clear-imgs {
-                background-color: $medgrey;
+                background-color: $dark;
             }
 
             .clear-imgs:hover {
-                background-color: $hover-grey;
+                background-color: $hover-dark;
             }
         }
 

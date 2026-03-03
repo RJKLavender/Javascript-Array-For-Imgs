@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="ROBOTS" content="NOINDEX,NOFOLLOW"> 
-	<title>javascript Array Assestment</title>
+	<title>JavaScript Array Assessment</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<script src="javascript/jquery-3.7.1.min.js"></script>
 </head>
@@ -18,44 +18,53 @@
 			<h1>Javascript Array Image Generator</h1>
 			<h2 id="currentemail">Current Email: Guest</h2>
 		</div>
-		<!--button container-->
+		<!-- interface container-->
 		<div class="img-box">
-			<div class="generate-button-row">
-				<button class="generate-img btn" type="button">Generate Image</button>
-				<button class="add-img btn" type="button">Add Image to Collection</button>
-				<button class="remove-img btn" type="button">Remove Image From Collection</button>
+			<div class ="forms-box">
+			<!--New Email Form-->
+			<div id="img-form-box" class="img-form-box">
+				<h2>New Email</h2>
+				<form id="img-form" class="img-form">
+					<div class="form-field">
+						<label for="email">Email</label>
+						<input id="email" class="email formtext" name="email" type="email" custommaxlength="35" pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}(?:\s\w+)?$" required>
+					</div>
+					<button class="submit btn" type="submit">Submit</button>
+				</form>
+				<div class="messages2">
+					<span class="message-text2 invisible">blank</span>
+				</div>
 			</div>
+
 			<!--Switch Email Form-->
 			<div class="button-row">
+				<h2>Select Email</h2>
 				<form id="selectemailbox">
-					<label for="selectemail">Select Email:</label>
+					<label for="selectemail">Select Email</label>
 					<select id="selectemail" name="selectemail">
 					</select>
 					<button class="switch-email btn" type="submit">Switch Email</button>
 				</form>
-			</div>
 			<div class="messages">
-				<span class="message-text invisible">blank</span>
+				<span class="message-text switch-message-text invisible">blank</span>
 			</div>
-			<!--New Email Form-->
-		<div id="img-form-box" class="img-form-box">
-			<h2>New Email Form</h2>
-			<form id="img-form" class="img-form">
-				<div class="form-field">
-					<label for="email">Email:</label>
-					<input id="email" class="email formtext" name="email" type="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\s\w+)?$" placeholder="Email" required>
-					<span class="error-message invisible"></span>
-				</div>
-				<button class="submit btn" type="submit">Submit</button>
-			</form>
-			<div class="messages2">
-				<span class="message-text2 invisible">blank</span>
 			</div>
+			</div>
+
+		<div class="generate-button-row">
+				<button class="generate-img btn" type="button">Generate Image</button>
+				<button class="add-img btn" type="button">Add Image to Collection</button>
+				<button class="remove-img btn" type="button">Remove Image From Collection</button>
 		</div>
+		<div class="messages3">
+				<span class="message-text3 generate-message-text invisible">blank</span>
+		</div>
+		<div class="image-section">
 			<div class="img-container">
 			<!--html will be generate by script here-->
 				<img id="img" src="#" alt="#">
 			</div>
+		</div>
 		</div>
 		
 		<!--Display Imgs Box-->
@@ -63,7 +72,7 @@
 			<h2 id="currentdisplayemail"> All Images For Current Email: Guest</h2>
 			<div class="display-button-row">
 				<button class="display-imgs btn" type="button">Display All Images</button>
-				<button class="clear-imgs btn" type="button">Clear Display Of All Images</button>
+				<button class="clear-imgs btn" type="button">Hide All Images From Display</button>
 			</div>
 			<!--html will be generate by script here-->
 			<div class="display-imgs-box">

@@ -20,6 +20,10 @@ box-sizing: border-box;
     display: none !important;
 }
 
+.hidden {
+    visibility: hidden !important;
+}
+
 // standard html Elements
 a {
     cursor: pointer;

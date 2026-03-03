@@ -11,7 +11,8 @@ const generateButtonRow = document.querySelector('generate-button-row');
 const buttonRow = document.querySelector('button-row');
 const switchEmail = document.querySelector('.switch-email');
 const selectEmailForm = document.getElementById('selectemailbox');
-const successMessage = document.querySelector('.message-text');
+const successSwitchMessage = document.querySelector('.switch-message-text');
+const successGenerateMessage = document.querySelector('.generate-message-text');
 const successMessageEmail = document.querySelector('.message-text2');
 const imgbox = document.querySelector('.img-container');
 const messages = document.querySelector('.messages');
@@ -21,9 +22,9 @@ const formbox = document.getElementById('img-form-box');
 const currentEmailDisplayTitle = document.getElementById('currentdisplayemail');
 const displayImgs = document.querySelector('.display-imgs');
 const displayImgsBox = document.querySelector('.display-imgs-box');
-const errorSpanMessage = document.querySelector('.error-message');
 const clearDisplay = document.querySelector('.clear-imgs');
 const removeImage = document.querySelector('.remove-img');
+const errorSpan = document.querySelector('.message-text2');
 
 //email variable set to global
 let currentEmail = ""; 
@@ -112,7 +113,6 @@ const resetFields = formToReset => {
     ResetFields.forEach(Field => {
         const label = Field.querySelector('label');
         const input = Field.querySelector('input');
-        const errorSpan = Field.querySelector('.error-message');
 
         // sets the field to blank, resets the border colour and hides error messege    
         input.value = '';
@@ -143,15 +143,28 @@ const saveemail = () => {
     option.value = email;
     select.add(option);
 
-    resetFields(form);
+    //check the length of the email and if too long then add elipses
+    let displayEmail;
+
+    let limit = 30;
+
+    if (email.length > limit) {
+   
+        displayEmail = email.slice(0, limit) + "...";
+    } else {
+        displayEmail = email;
+    }
 
     //set messeages and titles for user ability
-    currentEmailDisplayTitle.textContent = `All Images For Current Email: ${email}`;
-    currentEmailTitle.textContent = `Current Email: ${email}`;
+    currentEmailDisplayTitle.textContent = `All Images For Current Email: ${displayEmail}`;
+    currentEmailTitle.textContent = `Current Email: ${displayEmail}`;
     messagesEmail.style.display = 'block';
-    successMessageEmail.textContent = `${email} has been successfuily added to email list.`;
+    successMessageEmail.textContent = `${displayEmail} has been successfuily added to email list.`;
     successMessageEmail.classList.remove('invisible');
     errorSpanMessage.classList.add('invisible');
+    document.activeElement.blur()
+
+    temporaryErrorMessage(successMessageEmail);
 
     // reset display images box ready for button to be pressed and new images to be displayed
     let displayContainer = document.querySelector('.display-imgs-box');
@@ -162,6 +175,8 @@ const saveemail = () => {
 
     currentEmail = email;
 
+    resetFields(form);
+
     return currentEmail;
 }
 
@@ -169,7 +184,7 @@ const saveemail = () => {
 generateButton.addEventListener('click', () => {
   fetchapi(url).then(data => imgrandom(data));
 
-  successMessage.classList.add('invisible');
+  successGenerateMessage.classList.add('invisible');
 });
 
 //add to collection button function
@@ -190,9 +205,11 @@ addToCollection.addEventListener('click', () => {
     }
     //if image is already in local storage for this user display error message
     if (imgData.id in imgarray) {
-        successMessage.textContent = `Current image is already in ${currentEmail} image collection.`;
-        successMessage.style.color = '#d64541';
-        successMessage.classList.remove('invisible');
+        successGenerateMessage.style.color = '#d64541';
+        successGenerateMessage.textContent = `Current image is already in ${currentEmail} image collection.`;
+        successGenerateMessage.classList.remove('invisible');
+
+        temporaryErrorMessage(successGenerateMessage);
     } else {
         // if it is a new image then add it to local storage and display successfull message
         let img = document.querySelector('.img-container img');
@@ -200,9 +217,11 @@ addToCollection.addEventListener('click', () => {
         imgarray[imgData.id] = imgData;
         localStorage.setItem(currentEmail, JSON.stringify(imgarray));
 
-        successMessage.textContent = `Current image has been successfully added to ${currentEmail} images collection.`;
-        successMessage.style.color = '#10d53b';
-        successMessage.classList.remove('invisible');
+        successGenerateMessage.textContent = `Current image has been successfully added to ${currentEmail} images collection.`;
+        successGenerateMessage.style.color = '#10d53b';
+        successGenerateMessage.classList.remove('invisible');
+
+        temporaryErrorMessage(successGenerateMessage);
 
         // updates the display container for new image
         let displayContainer = document.querySelector('.display-imgs-box');
@@ -263,9 +282,11 @@ removeImage.addEventListener('click', () => {
         delete imgarray[imgDataId];
         localStorage.setItem(currentEmail, JSON.stringify(imgarray));
 
-        successMessage.textContent = `Current image has been successfully removed from ${currentEmail} images collection.`;
-        successMessage.style.color = '#10d53b';
-        successMessage.classList.remove('invisible');
+        successGenerateMessage.textContent = `Current image has been successfully removed from ${currentEmail} images collection.`;
+        successGenerateMessage.style.color = '#10d53b';
+        successGenerateMessage.classList.remove('invisible');
+
+        temporaryErrorMessage(successGenerateMessage);
         
         //update display container for removed image
         let displayContainer = document.querySelector('.display-imgs-box');
@@ -289,14 +310,53 @@ removeImage.addEventListener('click', () => {
             }
         }
 
-    //if image is not in collection then display error messege
+    //if image is not in collection then remove the last added image from the collection instead
     } else {
-        successMessage.textContent = `Current image is not in ${currentEmail} image collection.`;
-        successMessage.style.color = '#d64541';
-        successMessage.classList.remove('invisible');
-    }
-});
 
+        let keys = Object.keys(imgarray);
+        if (keys.length > 0) {
+            let lastImgId = keys[keys.length - 1]; // Get the last item in the array
+            delete imgarray[lastImgId];
+            localStorage.setItem(currentEmail, JSON.stringify(imgarray));
+            
+            // Remove the last image's visual element from the display container
+            let displayContainer = document.querySelector('.display-imgs-box');
+
+            let lastImgInDisplay = document.querySelector(`.display-imgs-box img[id="${lastImgId}"]`);
+
+            if (lastImgInDisplay) {
+                displayContainer.removeChild(lastImgInDisplay);
+            } 
+            successGenerateMessage.textContent = `Last Saved Image has been removed.`;
+            successGenerateMessage.style.color = '#10d53b';
+            successGenerateMessage.classList.remove('invisible');
+
+            temporaryErrorMessage(successGenerateMessage);
+        }
+    } 
+      if (Object.keys(imgarray).length === 0) {
+            //if collection is empty provide error messege
+            successGenerateMessage.textContent = "Collection is already empty.";
+            successGenerateMessage.style.color = '#d64541';
+            successGenerateMessage.classList.remove('invisible');
+
+            temporaryErrorMessage(successGenerateMessage);
+
+            let displayContainer = document.querySelector('.display-imgs-box');
+
+            let hasImgChild = displayContainer.querySelector(':scope > img') !== null;
+
+            if (!hasImgChild) {
+                let span = document.createElement('span');
+                displayContainer.appendChild(span);
+                span.textContent = "No images found in this collection.";
+            } else {
+                //reruns the dialog function so can be used for the updated collection
+                DisplayLargeImg();
+            }
+
+        }
+});
 
 // select email form function which triggers on button click/submit of form
 selectEmailForm.addEventListener('submit', (e) => {
@@ -306,10 +366,25 @@ selectEmailForm.addEventListener('submit', (e) => {
 
     //sets global value of email and changes the interfaces detials for the chosen user 
     const selection = selectEmailOption.value
-    currentEmailDisplayTitle.textContent = `All Images For Current Email: ${selection}`;
-    currentEmailTitle.textContent = `Current Email: ${selection}`;
-    successMessage.textContent = `Current Email has been successfully changed to ${selection}.`;
-    successMessage.classList.remove('invisible');
+
+    //check the character length of the selected option so that if too long add elipses
+    let selectedEmail;
+
+    let limit = 30;
+
+    if (selection.length > limit) {
+   
+        selectedEmail = selection.slice(0, limit) + "...";
+    } else {
+        selectedEmail = selection;
+    }
+
+    currentEmailDisplayTitle.textContent = `All Images For Current Email: ${selectedEmail}`;
+    currentEmailTitle.textContent = `Current Email: ${selectedEmail}`;
+    successSwitchMessage.textContent = `Current Email has been successfully changed to ${selectedEmail}.`;
+    successSwitchMessage.classList.remove('invisible');
+
+    temporaryErrorMessage(successSwitchMessage);
 
     //resets display images container ready for new images to be displayed
     let displayContainer = document.querySelector('.display-imgs-box');
@@ -317,6 +392,31 @@ selectEmailForm.addEventListener('submit', (e) => {
 
     currentEmail = selection;
 });
+
+//Timeout Function for error and success messages
+
+let errorTimer; // Global or module-scoped variable to track the timer
+
+const activeTimers = new Map();
+
+function temporaryErrorMessage(messegeId, duration = 12000) {
+  
+    let errorMessage = messegeId;
+
+  if (errorMessage) {
+    // Clear any existing timer to reset the countdown
+    if (activeTimers.has(messegeId)) {
+      clearTimeout(activeTimers.get(messegeId));
+    }
+
+    const timerId = setTimeout(() => {
+      errorMessage.classList.add('invisible');
+      activeTimers.delete(messegeId); 
+    }, duration);
+
+    activeTimers.set(messegeId, timerId);
+  }
+}
 
 //dialog window for displaying the imgs larger
 const dialog = document.getElementById('image-dialog');
@@ -362,12 +462,12 @@ displayImgs.addEventListener('click', () => {
 
     // Retrieve the data from local storage
     const storedData = localStorage.getItem(currentEmail);
+    let imgarray = JSON.parse(storedData);
 
     let span = document.createElement('span');
 
-    if (storedData) {
+    if (imgarray && Object.keys(imgarray).length > 0) {
         // Converts string back into an object
-        let imgarray = JSON.parse(storedData);
 
         //Loops through the object properties for each image getting the id, src and alt and setting them on the displayed images
         Object.values(imgarray).forEach(imgData => {
@@ -441,6 +541,12 @@ const validationOptions = [
             return patternRegEx.test(input.value);
         },
         errorMessage: (input, label) => `This is Not a Valid Email`
+    },
+    {
+        attribute: 'custommaxlength',
+        isValid: input => input.value.length <= parseInt(input.getAttribute('custommaxlength')),
+        errorMessage: (input, label) => `${label.textContent} Has Too Many Characters`
+
     }
 ]
 
@@ -448,7 +554,6 @@ const validationOptions = [
 const validateformField = formField => {
     const label = formField.querySelector('label');
     const input = formField.querySelector('input');
-    const errorSpan = formField.querySelector('.error-message');
 
     //sets the error value to false by default    
     let formFieldError = false;
@@ -461,7 +566,9 @@ const validateformField = formField => {
             input.style.borderColor = '#C52626';
             errorSpan.style.color = '#C52626'
             errorSpan.textContent = option.errorMessage(input, label);
-            errorSpan.classList.remove('invisible');         
+            errorSpan.classList.remove('invisible');  
+            
+            temporaryErrorMessage(errorSpan);
 
             //since error was found sets the error value to true
             formFieldError = true;
@@ -477,6 +584,8 @@ const validateformField = formField => {
         errorSpan.textContent = `This is a Valid Email`;
         errorSpan.classList.remove('invisible');
 
+        temporaryErrorMessage(errorSpan);
+
         //check if email already exists
        let emailList = JSON.parse(localStorage.getItem("emailList"));
 
@@ -485,9 +594,12 @@ const validateformField = formField => {
 
         if (emailList.includes(email)) {
             //if email already exists in local storage then show an error message and not allow it to be submitted
+            errorSpan.style.color = '#C52626'
             errorSpan.textContent = `current ${label.textContent} already exists`;
             errorSpan.classList.remove('invisible');
             formFieldError = true;
+
+            temporaryErrorMessage(errorSpan);
         }
 
     }
@@ -509,15 +621,8 @@ const validateFormFields = formToValidate => {
     const allValid = results.every(result => result === false);
 
         if (allValid) {
-            //logs if they are correct then submits the form
-        console.log('All fields are valid! Proceed with submit.');
-
         //runs the save email function to add email to local storage email list
         saveemail();
-
-    } else {
-        // if errors found will log and not submit and will wait until errors are fixed and form is resubmitted to test again
-        console.log('Some fields have errors.');
     }
 
     return allValid;
@@ -525,6 +630,7 @@ const validateFormFields = formToValidate => {
 
 //when submitted check if errors found by validation function then stop submit.
     form.addEventListener('submit', (e) => {
+        document.activeElement.blur()
         e.preventDefault();
         validateFormFields(form);
     });
