@@ -6,9 +6,9 @@
     padding: 7px 10px;
     border: 2px solid $dark;
     border-radius: 10px;
-    background-color: $white;
+    background-color: rgba(245, 245, 245,1);
     color: $black;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 
     @media (min-width: $small) {
         width: 750px;
@@ -51,7 +51,7 @@
             text-align: center;
             font-weight: $font-semibold;
             margin-bottom:5px;
-            color:$medgrey;
+            color:$black;
         }
     }
 
